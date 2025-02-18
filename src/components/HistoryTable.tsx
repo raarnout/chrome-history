@@ -9,14 +9,35 @@ interface HistoryItem {
   last_visit_time: number;
 }
 
-// Function to convert Chrome WebKit timestamp to readable format
-function formatChromeTimestamp(timestamp: number): string {
-  if (!timestamp) return "Unknown";
-  const epochStart = new Date(1601, 0, 1).getTime();
-  const timestampMs = timestamp / 1000; // Convert microseconds to milliseconds
-  return new Date(epochStart + timestampMs).toLocaleString();
-}
-
+// Function to convert Chrome WebKit timestamp to formatted "DD/MM/YYYY HH:MM:SS"
+function formatChromeTimestamp(timestamp: number | null | undefined): string {
+    if (!timestamp || timestamp <= 0) {
+      console.warn(`⚠️ Unknown timestamp detected:`, timestamp); // ✅ Log to console for debugging
+      return "Unknown";
+    }
+  
+    const epochStart = new Date(1601, 0, 1).getTime();
+    const timestampMs = timestamp / 1000; // Convert microseconds to milliseconds
+  
+    const date = new Date(epochStart + timestampMs);
+    if (isNaN(date.getTime())) {
+      console.warn(`⚠️ Invalid timestamp conversion detected:`, timestamp); // ✅ Log invalid conversions
+      return "Unknown";
+    }
+  
+    // ✅ Extract day, month, and year with double digits
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+  
+    // ✅ Extract time with 2-digit hours, minutes, seconds
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+  
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  }  
+  
 export default function HistoryTable() {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [error, setError] = useState<string | null>(null);

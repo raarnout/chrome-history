@@ -5,24 +5,35 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 
-// Get the Chrome User Data folder
-const chromePath = path.join(
-  os.homedir(),
-  'Library/Application Support/Google/Chrome'
-);
-
 // Find the correct profile directory
 function getHistoryDbPath(): string | null {
+  const homeDir = os.homedir();
+
+  // ✅ Properly detect macOS (Ventura, Sonoma, Sequoia, etc.)
+  const isMac = os.type() === 'Darwin' || os.platform() === 'darwin';
+  const isWindows = os.platform() === 'win32';
+
+  let basePath: string;
+
+  if (isMac) {
+    basePath = path.join(homeDir, 'Library/Application Support/Google/Chrome');
+  } else if (isWindows) {
+    basePath = path.join(homeDir, 'AppData/Local/Google/Chrome/User Data');
+  } else {
+    return null; // Unsupported OS
+  }
+
+  // ✅ Check for available Chrome profiles
   const possibleProfiles = ['Default', 'Profile 1', 'Profile 2', 'Profile 3'];
 
   for (const profile of possibleProfiles) {
-    const historyPath = path.join(chromePath, profile, 'History');
+    const historyPath = path.join(basePath, profile, 'History');
     if (fs.existsSync(historyPath)) {
-      return historyPath;
+      return historyPath; // ✅ Return first valid profile found
     }
   }
 
-  return null;
+  return null; // No valid history file found
 }
 
 // Convert JavaScript Date to Chrome WebKit timestamp format
