@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Chrome History Viewer
 
-## Getting Started
+## 📌 What This App Does
+This app **reads and displays your Chrome browsing history** in a table format.
+It fetches the history from Chrome's **SQLite database** and presents it with **filtering options**.
 
-First, run the development server:
+✅ **Works on macOS & Windows**  
+✅ **Filters history by date**  
+✅ **Displays the most recent browsing history**  
 
+> ⚠️ **Chrome must be closed to read history (Windows only)**  
+> 🦊 **Use Firefox or another browser to view `localhost:3000`**
+
+---
+
+## 🛠️ **Installation Guide**
+
+### 🔹 **Step 1: Clone the Repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/chrome-history.git
+cd chrome-history
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔹 **Step 2: Install Dependencies**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 **How to Use the App**
 
-## Learn More
+### 🔹 **1. Close Chrome (Windows only)**
+If you're on **Windows**, make sure **Chrome is completely closed**:
+```bash
+taskkill /F /IM chrome.exe
+```
 
-To learn more about Next.js, take a look at the following resources:
+On **macOS**, this is **not needed**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🔹 **2. Start the App**
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🔹 **3. Open Firefox and Go to:**
+```
+http://localhost:3000
+```
 
-## Deploy on Vercel
+You will now see a **table with your Chrome browsing history**! 🎉  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔍 **Troubleshooting**
+- If you get **"Failed to read history"** on Windows:
+  - Run `taskkill /F /IM chrome.exe` and restart the app.
+  - Ensure **you have read access** to `C:\Users\YourName\AppData\Local\Google\Chrome\User Data\Default\History`.
+- If the app doesn't find your history:
+  - Check if your **Chrome profile** is `Default` or `Profile 1`.
+  - Open `http://localhost:3000/api/history` to see raw JSON output.
+
+---
+
+## 🛠️ **Tech Stack**
+- **Next.js 15** (App Router)
+- **SQLite** (Reads Chrome history database)
+- **Tailwind CSS** (For styling)
+- **TypeScript** (For strong typing)
+
+📌 **Now you're ready to track your Chrome history! 🚀**
+
