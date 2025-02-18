@@ -17,7 +17,7 @@ It fetches the history from Chrome's **SQLite database** and presents it with **
 
 ### 🔹 **Step 1: Clone the Repository**
 ```bash
-git clone https://github.com/your-username/chrome-history.git
+git clone https://github.com/raarnout/chrome-history.git
 cd chrome-history
 ```
 
