@@ -30,20 +30,12 @@ npm install
 
 ## 🚀 **How to Use the App**
 
-### 🔹 **1. Close Chrome (Windows only)**
-If you're on **Windows**, make sure **Chrome is completely closed**:
-```bash
-taskkill /F /IM chrome.exe
-```
-
-On **macOS**, this is **not needed**.
-
-### 🔹 **2. Start the App**
+### 🔹 **1. Start the App**
 ```bash
 npm run dev
 ```
 
-### 🔹 **3. Open Firefox and Go to:**
+### 🔹 **2. Open a browser and go to:**
 ```
 http://localhost:3000
 ```

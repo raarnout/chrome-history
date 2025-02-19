@@ -12,7 +12,7 @@ interface HistoryItem {
 // Functie om de Chrome WebKit timestamp om te zetten naar "DD/MM/YYYY HH:MM:SS"
 function formatChromeTimestamp(timestamp: number | null | undefined): string {
   if (!timestamp || timestamp <= 0) {
-    console.warn(`⚠️ Unknown timestamp detected:`, timestamp);
+    console.warn(`Unknown timestamp detected:`, timestamp);
     return "Unknown";
   }
 
@@ -20,7 +20,7 @@ function formatChromeTimestamp(timestamp: number | null | undefined): string {
   const timestampMs = timestamp / 1000;
   const date = new Date(epochStart + timestampMs);
   if (isNaN(date.getTime())) {
-    console.warn(`⚠️ Invalid timestamp conversion detected:`, timestamp);
+    console.warn(`Invalid timestamp conversion detected:`, timestamp);
     return "Unknown";
   }
 
@@ -54,7 +54,7 @@ export default function HistoryTable() {
     loadHistory();
   }, [selectedDate]);
 
-  // ✅ Filteren op titel en URL (case-insensitive)
+  // Filteren op titel en URL (case-insensitive)
   const filteredHistory = history.filter(
     (item) =>
       item.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
