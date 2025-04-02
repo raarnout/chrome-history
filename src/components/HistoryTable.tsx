@@ -62,8 +62,6 @@ export default function HistoryTable() {
 
   return (
     <div className="w-full h-[calc(100vh-100px)] flex flex-col">
-      <h2 className="text-xl font-semibold mb-4 text-center">Chrome History</h2>
-
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       <ExportButton
